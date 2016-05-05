@@ -1,0 +1,235 @@
+/**
+ *  If you want to override some bootstrap variables, you have to change values here.
+ *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+ */
+$navbar-inverse-link-color: #5AADBB;
+$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.thumbnail {
+  height: 200px;
+
+  img.pull-right {
+    width: 50px;
+  }
+}
+
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector
+
+.ng-hide {
+  /* this is just another form of hiding an element */
+  display: none!important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  -ms-transform: scale(0); /* IE 9 */
+  -webkit-transform: scale(0); /* Safari */
+  transform: scale(0);
+}
+
+/*******Font Importing & SetUp *******/
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+
+@font-face {
+  font-family: 'IcoMoon';
+  src: local('IcoMoon'), local('IcoMoon'),
+    url('../assets/icomoonfree.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+br, .clearfix{
+	clear: both;
+}
+
+body{
+	background-color: $background;
+	color: $font;
+	font-size: $fontsize;
+	font-family: 'Roboto', sans-serif;
+}
+
+#LogoutAmazon, #LogoutFB, #LoginWithAmazon, #LoginWithFB{
+		display: none;
+		text-decoration: none;
+	}
+
+	#searchArea{
+		margin-bottom: 20px;
+	}
+
+	#navigationmenu{
+		display: block;
+		}
+
+		#navigationmenu ul{
+			list-style: none;
+		}
+
+		#navigationmenu ul li{
+			display: inline-block;
+		}
+
+		#navigationmenu ul li a{
+			margin-right: 8px;
+			text-decoration: none;
+	}
+
+	#logmessage,
+		#logmessage.ko{
+			display: block;
+			color: white;
+			background-color: red;
+			margin-top: 10px;
+			padding: 5px;
+			-webkit-border-radius: 6px;
+			border-radius: 6px;
+
+		}
+
+		#logmessage.ok{
+			color: white;
+			background-color: green;
+			font-weight: bold;
+			padding: 5px;
+		    animation-name: fadeOut;
+		    animation-duration: 5s;
+		    animation-fill-mode: forwards;
+		}
+
+		@-webkit-keyframes fadeOut{
+
+			/* Chrome, Safari, Opera */ 
+
+		    from {opacity: 1; display: block;}
+		    to {opacity: 0; display: none;}
+		} 
+		@keyframes fadeOut{
+
+			/* Standard syntax */ 
+
+		    from {opacity: 1; display: block;}
+		    to {opacity: 0; display: none;}
+	}
+
+/*******List PAGE *******/
+	table{
+		width: 100%;
+		table-layout: fixed;
+	}
+
+		tr{
+			min-height: 20px;
+		}
+		tr:nth-child(odd) td:nth-child(even){background-color: #ddd;}
+		tr:nth-child(even) td:nth-child(even){background-color: #aaa;}
+		tr:nth-child(odd) td:nth-child(odd){background-color: #f3f3f3;}
+		tr:nth-child(even) td:nth-child(odd){background-color: #c3c3c3;}
+		tr:hover{
+			outline: solid 3px #666;
+			color: #444;
+		}
+		th{
+			text-align: center;
+			background-color: #999;
+			padding: 5px 0 0 0;
+		}
+		th.download:before{
+			font-family: 'IcoMoon';
+			content: "\ea36";
+		}
+		td:not(.download){
+			min-height: 3em;
+		}
+		.item-label{
+			width: 15em; 
+		}
+		.download{
+			width: 3em;
+
+			&:hover{
+				font-size: 1.1em;
+				a{text-decoration: none;}
+			}
+
+		}
+		.item-type{
+			width: 10em;
+		}
+		.item-tags{
+			min-width: 50%;
+			div{
+				z-index: 3;
+				margin: 0 auto;
+				width: 90%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				&:hover{
+					position: relative;
+					display: inline-block;
+					z-index: 20;
+					text-overflow: initial;
+					overflow: visible;
+				}
+			}
+		}
+		td a{
+			display: inline-block;
+			width: 100%;
+			text-align: center;
+			text-decoration: none;
+		}
+		td a.ebextension:before{
+			font-family: "IcoMoon";
+			content: "\e9c1";
+		}
+		td a.script:before{
+			font-family: "IcoMoon";
+			content: "\e907";
+		}
+		td a.package:before{
+			font-family: "IcoMoon";
+			content: "\e960";
+		}
+
+/*******Upload PAGE *******/
+	#uplaodForm{
+		display: block;
+		outline: solid 1px tomato;
+		text-align: left;
+	}
+
+	#uploadForm > input, #uploadForm > label{
+		display: block;
+		clear: both;
+	}
+
+	#uploadForm ul.radio{
+		list-style: none;
+		display: block;
+		clear: both;
+	}
+	#uploadForm ul.radio li{
+		width: 100%;
+	}
+
