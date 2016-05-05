@@ -68,9 +68,13 @@ body{
 	font-family: 'Roboto', sans-serif;
 }
 
-#LogoutAmazon, #LogoutFB, #LoginWithAmazon, #LoginWithFB{
+#LogoutAmazon, #LogoutFB{
 		display: none;
 		text-decoration: none;
+	}
+
+	#LoginWithAmazon, #LoginWithFB{
+		display: block;
 	}
 
 	#searchArea{
