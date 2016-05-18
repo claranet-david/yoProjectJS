@@ -9,10 +9,6 @@
 			
 			var vm = this;
 
-			console.log("TestLambdaController: ");
-
-			var vm = this;
-
 			vm.payload = "your text here!";
 
 
@@ -26,6 +22,9 @@
 		    	console.dir(response.Payload);
 		    	temporal = JSON.parse(response.Payload).word_to_echo_str;
 		    	console.log(temporal);
+
+		    	vm.response = temporal;
+
 		    	
 		    }
 		    vm.runFunctionOnLambda = function(fn_str, payload){

@@ -47,7 +47,7 @@
 					version: 'v2.4'
 				});
 				FB.login(function (response) {
-					customAWSService.bucket.config.credentials = new AWS.WebIdentityCredentials({
+					customAWSService.AWS.config.credentials = new AWS.WebIdentityCredentials({
 						ProviderId: 'graph.facebook.com',
 						RoleArn: customAWSService.roleArnFB,
 						WebIdentityToken: response.authResponse.accessToken
@@ -57,7 +57,7 @@
 					//button2.style.display = 'block';
 
 					console.log("FB User ID "+fbUserId);
-					console.log("Credentials "+JSON.stringify(customAWSService.bucket.config.credentials));
+					console.log("Credentials "+JSON.stringify(customAWSService.AWS.config.credentials));
 
 					var logmessageElement = document.getElementById('logmessage');
 					logmessageElement.innerHTML = 'LOGGED IN!';
@@ -72,13 +72,13 @@
 
 			document.getElementById('LogoutFB').onclick = function () {
 
-				customAWSService.bucket.config.credentials = new AWS.WebIdentityCredentials({
+				customAWSService.AWS.config.credentials = new AWS.WebIdentityCredentials({
 					ProviderId: '',
 					RoleArn: '',
 					WebIdentityToken: ''
 				});
 
-				console.log("Credentials "+JSON.stringify(customAWSService.bucket.config.credentials));
+				console.log("Credentials "+JSON.stringify(customAWSService.AWS.config.credentials));
 
 				document.getElementById('LogoutFB').style.display = 'none';
 				document.getElementById('LoginWithFB').style.display = 'block';
