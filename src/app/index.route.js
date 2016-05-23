@@ -23,10 +23,15 @@
         controller: 'UploadController',
         controllerAs: 'upload'
       })
-      .when('/test', {
+      .when('/lambda', {
         templateUrl: 'app/components/testLambda/testLambda.html',
         controller: 'testLambdaController',
         controllerAs: 'testLambda'
+      })
+      .when('/promises', {
+        templateUrl: 'app/components/promises/promises.html',
+        controller: 'PromisesController',
+        controllerAs: 'promises'
       })
       .when('/list',{
         templateUrl: 'app/components/list/list.html',

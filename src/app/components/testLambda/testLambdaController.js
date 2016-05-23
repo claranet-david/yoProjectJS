@@ -3,9 +3,9 @@
 		.module('yoProjectJS')
 		.controller('testLambdaController', testLambdaController);
 
-		testLambdaController.$inject = ['$scope', '$http', 'customAWSService'];
+		testLambdaController.$inject = ['$scope', '$http', 'loginService', 'customAWSService'];
 
-		function testLambdaController($scope, $http, customAWSService){
+		function testLambdaController($scope, $http, loginService, customAWSService){
 			
 			var vm = this;
 
