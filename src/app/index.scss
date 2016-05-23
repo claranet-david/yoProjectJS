@@ -71,10 +71,19 @@ body{
 #LogoutAmazon, #LogoutFB{
 		display: none;
 		text-decoration: none;
+		max-width: 10em;
+		margin: 1em 0;
+		-webkit-box-shadow: 2px 2px 0 3px $shadows;
+		box-shadow: 2px 2px 0 3px $shadows;
 	}
 
 	#LoginWithAmazon, #LoginWithFB{
 		display: block;
+		max-width: 10em;
+		margin: 1em 0;
+		-webkit-box-shadow: 2px 2px 0 3px $shadows;
+		box-shadow: 2px 2px 0 3px $shadows;
+
 	}
 
 	#searchArea{
