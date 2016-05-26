@@ -5,13 +5,19 @@
 		.module('yoProjectJS')
 		.service('customAWSService', customAWSService);
 
-		customAWSService.$inject = [];
+		customAWSService.$inject = ['$q'];
 
-		function customAWSService(){
+		function customAWSService($q){
 
 			var vm = this;
 
 			vm.AWS = AWS;
+
+
+			// vm.promiseAWS;
+			if (typeof Promise === 'undefined') {
+			  AWS.config.setPromisesDependency($q);
+			} //info in https://blogs.aws.amazon.com/javascript/post/Tx3BZ2DC4XARUGG/Support-for-Promises-in-the-SDK
 
 			vm.AWS.config.region = 'eu-west-1';
 

@@ -20,7 +20,7 @@
 			(function(d) {
 				var a = d.createElement('a'); a.href = '#';
 				a.id = 'LoginWithFB';
-				a.className = "btn btn-primary btn-lg";
+				a.className = "btn btn-primary btn-md";
 				a.innerHTML = 'Login via FB';
 				d.getElementById('LoginArea').appendChild(a);
 			})(document);
@@ -28,7 +28,7 @@
 			(function(d) {
 				var a = d.createElement('a'); a.href = '#';
 				a.id = 'LogoutFB';
-				a.className = "btn btn-primary btn-lg";
+				a.className = "btn btn-primary btn-md";
 				a.innerHTML = 'Logout';
 				d.getElementById('LoginArea').appendChild(a);
 			})(document);

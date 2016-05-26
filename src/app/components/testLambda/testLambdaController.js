@@ -18,13 +18,12 @@
 		    		console.dir(err);
 		    		return;
 		    	}
-		    	console.dir(response);
-		    	console.dir(response.Payload);
-		    	temporal = JSON.parse(response.Payload).word_to_echo_str;
-		    	console.log(temporal);
+		    	// console.dir(response);
+		    	// console.dir(response.Payload);
+		    	// temporal = JSON.parse(response.Payload).word_to_echo_str;
+		    	// console.log(temporal);
 
-		    	vm.response = temporal;
-
+		    	// vm.response = temporal;
 		    	
 		    }
 		    vm.runFunctionOnLambda = function(fn_str, payload){
@@ -33,11 +32,41 @@
 		    		Payload: JSON.stringify(payload)
 		    	};
 		    	lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
-		    	lambda.invoke(settings, vm.handleResponseFromLambda);
+		    	lambda.invoke(settings, vm.handleResponseFromLambda).promise()
+		    		.then(function(response){
+		    			console.log("Success!");
+		    			JSON.parse(response.Payload);
+		    			console.log(response.Payload.word_to_echo_str);
+		    		 	vm.response = response;	    			
+		    		})
+		    		.catch(function(failure){
+		    			console.log("Failure: " + failure);
+		    		})
+
+		    		// .finally(function(){
+		    		// 	console.log("Elapsed Time: " + vm.elapsedTime);
+		    		// });
+		    		// .on("success", function(response){
+		    		// 	console.log("Success!");
+		    		// 	console.log(JSON.parse(response.data.Payload).word_to_echo_str);
+		    		// 	return response;
+
+		    		// })
+		    		// .on("error", function(response){
+		    		// 	console.log("There was some kind of Error!");
+
+		    		// })
+		    		// .on("completion", function(response){
+		    		// 	vm.elapsedTime = Date.now() - vm.startTime;
+		    		// 	console.log(Date.now());
+		    		// 	console.log("Elapsed Time: "+vm.elapsedTime);
+
+		    		// })
 		    }
 		    vm.buttonAction = function(payload){
-		    	console.log("Payload "+payload);
-		    	console.log("Credentials "+JSON.stringify(customAWSService.bucket.config.credentials));				
+		    	vm.startTime = Date.now();
+		    	console.log("Payload: "+ payload);
+		    	//console.log("Credentials "+JSON.stringify(customAWSService.AWS.config.credentials));				
 		    	vm.runFunctionOnLambda("myFirstTestFunction", {
 		    	 	word_to_echo_str: payload
 		    	 });
