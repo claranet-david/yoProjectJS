@@ -32,16 +32,7 @@
 		    		Payload: JSON.stringify(payload)
 		    	};
 		    	lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
-		    	lambda.invoke(settings, vm.handleResponseFromLambda).promise()
-		    		.then(function(response){
-		    			console.log("Success!");
-		    			JSON.parse(response.Payload);
-		    			console.log(response.Payload.word_to_echo_str);
-		    		 	vm.response = response;	    			
-		    		})
-		    		.catch(function(failure){
-		    			console.log("Failure: " + failure);
-		    		})
+		    	return lambda.invoke(settings, vm.handleResponseFromLambda).promise()
 
 		    		// .finally(function(){
 		    		// 	console.log("Elapsed Time: " + vm.elapsedTime);
@@ -60,16 +51,23 @@
 		    		// 	vm.elapsedTime = Date.now() - vm.startTime;
 		    		// 	console.log(Date.now());
 		    		// 	console.log("Elapsed Time: "+vm.elapsedTime);
-
 		    		// })
 		    }
 		    vm.buttonAction = function(payload){
 		    	vm.startTime = Date.now();
-		    	console.log("Payload: "+ payload);
+		    	//console.log("Payload: "+ payload);
 		    	//console.log("Credentials "+JSON.stringify(customAWSService.AWS.config.credentials));				
 		    	vm.runFunctionOnLambda("myFirstTestFunction", {
 		    	 	word_to_echo_str: payload
-		    	 });
+		    	 }).then(function(result){
+		    			console.log("Success!");
+		    			//console.log(response.Payload.word_to_echo_str);
+		    		 	vm.response = JSON.parse(result.Payload).word_to_echo_str;
+		    		 	vm.elapsedTime = Date.now() - vm.startTime;	    			
+		    		})
+		    		.catch(function(failure){
+		    			console.log("Failure: " + failure);
+		    		})
 		    }
 		}
 })();
