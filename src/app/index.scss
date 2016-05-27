@@ -252,7 +252,14 @@ body{
 /******Lambda Test*****/
 
 	#lambdaResponse{
-		font-size: 2em;
+		text-align: right;
+		margin: 20px 0;
+		display: block;
+		min-height: 2em;
+		font-size: 3em;
 		font-weight: bolder;
+	}
+	#lambdaElapsed{
+		font-size: 0.8em;
 	}
 
