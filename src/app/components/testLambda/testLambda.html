@@ -4,7 +4,7 @@
 
 	<input ng-model="testLambda.payload" type="text" name="payloader"/>
 
-	<button id="CLICKER" ng-click="testLambda.buttonAction(testLambda.payload)">Click me</button>
+	<button id="CLICKER" class="btn btn-default" ng-click="testLambda.buttonAction(testLambda.payload)">Ping Lambda</button>
 
 	<p id="lambdaResponse" >{{testLambda.response}}</p>
 	<p id="lambdaElapsed" >Elapsed Time: {{testLambda.elapsedTime}}ms</p>

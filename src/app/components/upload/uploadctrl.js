@@ -27,11 +27,23 @@
                 vm.fileName = String(vm.file.name);
                 vm.populate();
 
+                console.log(vm.obj);
+
                 var params = {
-                    Key: "test/" + vm.obj.location, 
+                    Key: "uploads/" + vm.obj.location, 
                     ContentType: vm.file.type, 
-                    Body: vm.file
+                    Body: vm.file,
+                    Metadata: {
+                        file: String(vm.fileLabel),
+                        description: String(vm.fileDescription),
+                        date: String(vm.fileDate),
+                        type: String(vm.fileType),
+                        tags: String(vm.fileTags),
+                        locatiion: String(vm.obj.location)
+                    }
                 };
+
+                customAWSService.bucket.config.credentials = customAWSService.AWS.config.credentials;
                 
                 customAWSService.bucket.upload(params, function (err, data) {
                   results.innerHTML = err ? 'ERROR!' + String(err) : 'UPLOADED.';
