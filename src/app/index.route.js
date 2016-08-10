@@ -27,6 +27,11 @@
         templateUrl: 'app/components/testLambda/testLambda.html',
         controller: 'testLambdaController',
         controllerAs: 'testLambda'
+      }) 
+      .when('/dynamodb', {
+        templateUrl: 'app/components/dynamoDB/dynamodb.html',
+        controller: 'dynamoDBController',
+        controllerAs: 'dynamodb'
       })
       .when('/promises', {
         templateUrl: 'app/components/promises/promises.html',
