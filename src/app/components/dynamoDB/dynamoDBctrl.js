@@ -9,6 +9,7 @@
 		function dynamoDBController($scope, $http, $routeParams, loginService, customAWSService){
 
 			var vm = this;
+            vm.queriedItem = "";
 
             vm.dynamodb = new customAWSService.AWS.DynamoDB(
                 {
@@ -16,37 +17,43 @@
                     region: 'us-west-2'
                 });
 
-            vm.buttonAction = function(){
-                vm.key = "STARTING";
+            vm.docClient = new customAWSService.AWS.DynamoDB.DocumentClient({service: vm.dynamodb});
+            console.log("DynamoDB Ready");
 
-                console.log("GOGOGO!");
+            vm.dynamodb.scan(params={TableName: "JStable"}, function(err, data) {
+                if (err) console.log(err, err.stack); // an error occurred
+                //else console.log(data);           // successful response
+            }).promise().then(function(result){
+                    console.log("Success!" + JSON.stringify(result));
+                    vm.fullDynDBData = result.Items;
+                }).catch(function(failure){
+                    console.log("Failure: " + JSON.stringify(failure));
+                    vm.queriedItem = "There was an error on your query!!";
+                });
 
-                docClient = new customAWSService.AWS.DynamoDB.DocumentClient({service: vm.dynamodb});
-                console.log("DynamoDB Ready");
+            vm.queryAction = function(){
+
+                placeholderKey = vm.key;
 
                 vm.params = {
                     TableName: "JStable",
                     KeyConditionExpression: "FileName = :itemname",
                     ExpressionAttributeValues: {
-                        ":itemname":"Paco"
+                        ":itemname": placeholderKey
                     }
                 }
 
-                docClient.query(vm.params, function(err, data){
+                vm.docClient.query(vm.params, function(err, data){
                         if(err) console.log("There was an error");
-                        else console.log(data);
+                        //else console.log(data);
                 }).promise().then(function(result){
-
-                    console.log("Success!" + result);
-
+                    console.log("Success!" + JSON.stringify(result));
+                    vm.queriedItem = result.Items;
                 }).catch(function(failure){
-
-                    console.log("Failure: " + failure);
-
+                    console.log("Failure: " + JSON.stringify(failure));
+                    vm.queriedItem = "There was an error on your query!!";
                 });
-                vm.key = '';
             }
-
         }
 
 })();

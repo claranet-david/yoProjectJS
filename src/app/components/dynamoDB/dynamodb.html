@@ -2,13 +2,34 @@
 
 	<p>This is the DynamoDB route, for testing purposes:</p>
 
+<div class="container">
+		<table class="table-condensed table-bordered">
+	  <tr>
+	    <th class="item-label">Label</th>
+	    <th class="download"></th>
+	    <th class="item-type hidden-xs">Type</th>
+	    <th class="item-tags">Tags</th>
+	  </tr>
+	  <tr ng-repeat="item in dynamodb.fullDynDBData">
+	    <td class="item-label">{{item.FileName.S}}</td>
+	    <td class="download"><a href="/{{item.FileType}}s/{{item.FileName}}" class="{{item.FileType}}"></a></td>
+	    <td class="item-type hidden-xs">{{item.FileType.S}}</td>
+	    <!-- <td><a href="{{item.location}}">{{item.label}}</a></td> -->
+	    <td class="item-tags"><div>{{item.FileTags.S}}</div></td>
+	  </tr>
+	</table>	
+</div>
 
 <div class="container">
 
 	<input ng-model="dynamodb.key" type="text" name="payloader"/>
 
-	<button id="CLICKERDYNAMO" class="btn btn-default" ng-click="dynamodb.buttonAction()">Ping DynamoDB</button>
+	<button id="CLICKERDYNAMO" class="btn btn-default" ng-click="dynamodb.queryAction()">Query DynamoDB</button>
 
+</div>
+
+<div class="container">
+	<p>{{dynamodb.queriedItem}}</p>
 </div>
 	
 </div>
