@@ -24,6 +24,7 @@
 			
 			vm.bucketName = 'thabeat--archiving-tool';
 
+
 			vm.bucket = new vm.AWS.S3({
 				params: {
 					Bucket: vm.bucketName
