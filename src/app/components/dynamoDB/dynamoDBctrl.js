@@ -30,10 +30,10 @@
             vm.dropzone = document.getElementById('dropzone');
 
             vm.dropzone.ondrop = function(e){
-                //need to check just one file dropped
                 e.preventDefault();
                 this.className = 'dropzone';
 
+                
                 if(e.dataTransfer.files.length==1){
                     console.log("Ok!");
                     console.log(e.dataTransfer.files[0]);
@@ -153,6 +153,7 @@
                 });
 
                 vm.refreshTable();
+
             }
 
             vm.refreshTable();
