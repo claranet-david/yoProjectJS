@@ -20,12 +20,6 @@
 	</table>	
 </div>
 
-
-
-<div class="container">
-	<p>{{dynamodb.queriedItem}}</p>
-</div>
-
 <div class="container">	   
 	  	<input ng-model="dynamodb.key" type="text" name="payloader"/>
 
@@ -34,6 +28,10 @@
 	  	<button id="deleteDYNAMO" class="btn btn-default" ng-click="dynamodb.deleteAction()">Delete Item</button>
 
 	  	<button id="refreshDYNAMO" class="btn btn-default" ng-click="dynamodb.refreshTable()">Refresh Table</button>
+</div>
+
+<div class="container queryResults">
+	<p>{{dynamodb.queriedItem}}</p>
 </div>
 
 <div class="container">
@@ -45,7 +43,7 @@
     		    <label for="fileDescription">File Description:</label>
     		    <input type="text" ng-model="dynamodb.newItem.FileDescription"/>
     		    
-    		    <label for="fileDate">File Date (format dd/mm/yyyy):</label>
+    		    <label for="fileDate">File Date (yyyy/mm/dd):</label>
     		    <input type="text" ng-model="dynamodb.newItem.FileDate"/>
     			<label for="filetype">File Type:</label>
     			<div class="radio">
@@ -57,7 +55,7 @@
     			</div>
     	</div>
     	<div class="formPart">
-    		<label for="fileTags">Tags:</label>
+    		<label for="fileTags">Tags (comma separated):</label>
     		<input type="text" ng-model="dynamodb.newItem.FileTags" />
     		<label for="file-chooser">File To Upload:</label>
     		<input type="file" id="file-chooser"/> 

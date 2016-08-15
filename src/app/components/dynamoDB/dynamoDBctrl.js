@@ -13,7 +13,7 @@
             vm.newItem = {
                 FileName: 'Name for the new file',
                 FileDate: '2016-08-14',
-                FileTags: 'Comma separated list of Tags',
+                FileTags: 'Tag1, Tag2, Tag3, ...',
                 FileDescription: 'Description for the new File',
                 FileType: ''
             };
@@ -33,15 +33,15 @@
                 //need to check just one file dropped
                 e.preventDefault();
                 this.className = 'dropzone';
-                console.log(e.dataTransfer.files[0]);
-                vm.newItem.FileName = e.dataTransfer.files[0].name;
-                console.log("FileName: " + vm.newItem.FileName);
-                vm.newItem.FileDate = e.dataTransfer.files[0].lastModifiedDate.toISOString().slice(0,10);
-                console.log("FileDate: " + vm.newItem.FileDate);
-                $scope.$digest();
 
                 if(e.dataTransfer.files.length==1){
                     console.log("Ok!");
+                    console.log(e.dataTransfer.files[0]);
+                    vm.newItem.FileName = e.dataTransfer.files[0].name;
+                    console.log("FileName: " + vm.newItem.FileName);
+                    vm.newItem.FileDate = e.dataTransfer.files[0].lastModifiedDate.toISOString().slice(0,10);
+                    console.log("FileDate: " + vm.newItem.FileDate);
+                    $scope.$digest();
                     return e.dataTransfer.files[0];
                 }
                 else console.log("There was some sort of error: Should be exclusively one item!");

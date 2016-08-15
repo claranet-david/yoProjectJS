@@ -237,6 +237,7 @@ body{
 
 	#uploadForm div.formPart > input, #uploadForm div.formPart > label{
 		display: block;
+		width: 80%;
 		clear: both;
 	}
 
@@ -292,5 +293,10 @@ body{
 		margin-right: 3%;
 		vertical-align: top;
 		min-width: 180px;
+	}
+
+	.queryResults{
+		min-height: 100px;
+		font-size: 1rem;
 	}
 
