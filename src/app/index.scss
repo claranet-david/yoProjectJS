@@ -235,8 +235,9 @@ body{
 		text-align: left;
 	}
 
-	#uploadForm > input, #uploadForm > label{
+	#uploadForm div.formPart > input, #uploadForm div.formPart > label{
 		display: block;
+		width: 80%;
 		clear: both;
 	}
 
@@ -266,5 +267,36 @@ body{
 /*****DynamoDB******/
 	#dynamodb .container{
 		margin-bottom: 20px;
+	}
+
+	#dropzone{
+		margin: 15px;
+		height: 150px;
+		width: 150px;
+		text-align: center;
+		line-height: 150px;
+		
+		&.dropzone{
+			outline: dashed 3px #bbb;
+			color: #bbb;
+		}
+		&.dropzone.over{
+			margin: 15px; 
+			outline: dashed 5px #222;
+			color: #222;	
+		}
+	}
+
+	div.formPart{
+		display: inline-block;
+		width: 46.5%;
+		margin-right: 3%;
+		vertical-align: top;
+		min-width: 180px;
+	}
+
+	.queryResults{
+		min-height: 100px;
+		font-size: 1rem;
 	}
 

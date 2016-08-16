@@ -9,9 +9,14 @@
 		function dynamoDBController($scope, $http, $routeParams, loginService, customAWSService){
 
 			var vm = this;
-            vm.queriedItem = "";
-
-            vm.newItem = "";
+            vm.queriedItem = '';
+            vm.newItem = {
+                FileName: 'Name for the new file',
+                FileDate: '2016-08-14',
+                FileTags: 'Tag1, Tag2, Tag3, ...',
+                FileDescription: 'Description for the new File',
+                FileType: ''
+            };
 
             vm.dynamodb = new customAWSService.AWS.DynamoDB(
                 {
@@ -22,16 +27,48 @@
             vm.docClient = new customAWSService.AWS.DynamoDB.DocumentClient({service: vm.dynamodb});
             console.log("DynamoDB Ready");
 
-            vm.dynamodb.scan(params={TableName: "JStable"}, function(err, data) {
-                if (err) console.log(err, err.stack); // an error occurred
-                //else console.log(data);           // successful response
-            }).promise().then(function(result){
-                    console.log("Success!" + JSON.stringify(result));
-                    vm.fullDynDBData = result.Items;
-                }).catch(function(failure){
-                    console.log("Failure: " + JSON.stringify(failure));
-                    vm.queriedItem = "There was an error on your query!!";
-                });
+            vm.dropzone = document.getElementById('dropzone');
+
+            vm.dropzone.ondrop = function(e){
+                e.preventDefault();
+                this.className = 'dropzone';
+
+                
+                if(e.dataTransfer.files.length==1){
+                    console.log("Ok!");
+                    console.log(e.dataTransfer.files[0]);
+                    vm.newItem.FileName = e.dataTransfer.files[0].name;
+                    console.log("FileName: " + vm.newItem.FileName);
+                    vm.newItem.FileDate = e.dataTransfer.files[0].lastModifiedDate.toISOString().slice(0,10);
+                    console.log("FileDate: " + vm.newItem.FileDate);
+                    $scope.$digest();
+                    return e.dataTransfer.files[0];
+                }
+                else console.log("There was some sort of error: Should be exclusively one item!");
+            }
+            vm.dropzone.ondragover = function(e){
+                this.className = 'dropzone over';
+                return false;
+            }
+            vm.dropzone.ondragleave = function(e){
+                this.className = 'dropzone';
+                return false;
+            }
+
+
+            vm.refreshTable = function(){
+
+                vm.dynamodb.scan(params={TableName: "JStable"}, function(err, data) {
+                    if (err) console.log(err, err.stack); // an error occurred
+                    //else console.log(data);           // successful response
+                }).promise().then(function(result){
+                        console.log("Success!" + JSON.stringify(result));
+                        vm.fullDynDBData = result.Items;
+                    }).catch(function(failure){
+                        console.log("Failure: " + JSON.stringify(failure));
+                        vm.queriedItem = "There was an error on your query!!";
+                    });
+            }
 
             vm.queryAction = function(){
 
@@ -61,15 +98,14 @@
 
                 placeholderKey = vm.key;
 
-                vm.params = {
+                paramsDelete = {
                     TableName: "JStable",
-                    KeyConditionExpression: "FileName = :itemname",
-                    ExpressionAttributeValues: {
-                        ":itemname": placeholderKey
-                    }
+                   Key: {
+                       FileName: {S: placeholderKey}
+                   },
                 }
 
-                vm.dynamodb.deleteItem(vm.params, function(err, data){
+                vm.dynamodb.deleteItem(paramsDelete, function(err, data){
                         if(err) console.log("There was an error");
                         //else console.log(data);
                 }).promise().then(function(result){
@@ -80,16 +116,7 @@
                     vm.queriedItem = "There was an error on your query!!";
                 });
 
-                vm.dynamodb.scan(params={TableName: "JStable"}, function(err, data) {
-                    if (err) console.log(err, err.stack); // an error occurred
-                    //else console.log(data);           // successful response
-                }).promise().then(function(result){
-                        console.log("Success!" + JSON.stringify(result));
-                        vm.fullDynDBData = result.Items;
-                    }).catch(function(failure){
-                        console.log("Failure: " + JSON.stringify(failure));
-                        vm.queriedItem = "There was an error on your query!!";
-                    });
+                vm.refreshTable();
             }
 
             vm.populate = function(){
@@ -123,22 +150,13 @@
                     },function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
                     //else console.log(data);           // successful response
-                })
+                });
 
-                vm.dynamodb.scan(params={TableName: "JStable"}, function(err, data) {
-                    if (err) console.log(err, err.stack); // an error occurred
-                    //else console.log(data);           // successful response
-                }).promise().then(function(result){
-                        console.log("Success!" + JSON.stringify(result));
-                        vm.fullDynDBData = result.Items;
-                    }).catch(function(failure){
-                        console.log("Failure: " + JSON.stringify(failure));
-                        vm.queriedItem = "There was an error on your query!!";
-                    });
-
-                console.log(JSON.stringify(vm.newItem,null,"    "));
+                vm.refreshTable();
 
             }
+
+            vm.refreshTable();
         }
 
 })();
