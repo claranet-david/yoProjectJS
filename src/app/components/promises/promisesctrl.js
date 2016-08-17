@@ -42,13 +42,5 @@
 					vm.elapsedTime = Date.now() - startTime;
 					//console.log(vm.elapsedTime);
 				});
-
-
-
-				
-
-			
-
-
 		}
 })();

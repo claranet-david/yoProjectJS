@@ -18,6 +18,30 @@
                 FileType: ''
             };
 
+            //Filtering Methods
+            vm.filterOptions = {
+                files: [
+                    {id : 1, name : 'ALL', type: "all" },
+                    {id : 2, name : 'ebextensions', type: "ebextension" },
+                    {id : 3, name : 'packages', type: "package"},
+                    {id : 4, name : 'scripts', type: "script" }
+                ]
+            };
+            //*** Mapped to the model to filter ***/
+            vm.filterItem = {
+                files: vm.filterOptions.files[0]
+            };
+
+            vm.customFilter = function (data) {
+                    if (data.FileType.S === vm.filterItem.files.type) {
+                      return true;
+                    } else if (vm.filterItem.files.type === "all") {
+                      return true;
+                    } else {
+                      return false;
+                    }
+            };
+
             vm.dynamodb = new customAWSService.AWS.DynamoDB(
                 {
                     apiVersion: '2012-08-10',

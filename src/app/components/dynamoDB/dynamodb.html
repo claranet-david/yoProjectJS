@@ -3,14 +3,22 @@
 	<p>This is the DynamoDB route, for testing purposes:</p>
 
 <div class="container">
-		<table class="table-condensed table-bordered">
+
+	<div id="searchArea" class="text-center">
+		<p>Search:</p> 
+		Tags: <input ng-model="dynamodb.query.FileTags.S" type="text" name="searchbox1"/>
+		Type: <select ng-model="dynamodb.filterItem.files" ng-options="option.name for option in dynamodb.filterOptions.files " name="dropdown">
+		</select>
+		
+	</div>
+	<table class="table-condensed table-bordered">
 	  <tr>
 	    <th class="item-label">Label</th>
 	    <th class="download"></th>
 	    <th class="item-type hidden-xs">Type</th>
 	    <th class="item-tags">Tags</th>
 	  </tr>
-	  <tr ng-repeat="item in dynamodb.fullDynDBData">
+	  <tr ng-repeat="item in dynamodb.fullDynDBData  | filter:dynamodb.query | filter:dynamodb.customFilter | orderBy: 'FileName.S' ">
 	    <td class="item-label">{{item.FileName.S}}</td>
 	    <td class="download"><a href="/{{item.FileType.S}}s/{{item.FileName.S}}" class="{{item.FileType.S}}"></a></td>
 	    <td class="item-type hidden-xs">{{item.FileType.S}}</td>
